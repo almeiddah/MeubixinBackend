@@ -17,6 +17,10 @@ module.exports = function(){
         type: "String",
         required: true,
       },  
+      id_loja: {
+        type: "String",
+        required: true,
+      },
     })
     return mongoose.model("Produto", schema);
 }();

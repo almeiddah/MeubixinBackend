@@ -1,4 +1,3 @@
-const bodyParser = require('body-parser');
 const express = require('express');
 const routerProdutos = require("../app/routes/produtos")
 const bodyParser = require("body-parser");
