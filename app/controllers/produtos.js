@@ -1,9 +1,7 @@
 const Produto = require("../models/produto")
 
 module.exports.inserirProdutos = function(req,res){
-
   let produto = req.body;
-
   let promise = Produto.create(produto);
   
   promise.then(function(produto){
