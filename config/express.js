@@ -1,6 +1,7 @@
 const express = require('express');
 const routerProdutos = require("../app/routes/produtos")
 const bodyParser = require("body-parser");
+
 module.exports = function(){
     let app = express();
     app.set("port", 3000);
