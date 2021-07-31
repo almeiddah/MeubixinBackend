@@ -17,11 +17,11 @@ module.exports.inserirProdutos = function(req,res){
   })
 }
 
-module.exports.listarProdutosPorId = function (req,res){
+module.exports.listarProdutosPorloja = function (req,res){
     
     let id = req.params.id;
     console.log("Id:",id);
-    let promise = Produto.find({id_loja:id}).exec();
+    let promise = Produto.find({usuario:id}).exec();
     promise.then(function(produtos){
       res.status(200).json(view.renderMany(produtos))
     }).catch(function(error){

@@ -6,7 +6,6 @@ function render(produto){
         Preço: produto.valor_produto,
         Categoria: produto.tipo_produto,
         Descrição: produto.descricao_produto,
-        id_loja: produto.id_loja,
         
 
     }

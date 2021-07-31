@@ -17,9 +17,9 @@ module.exports = function(){
         type: "String",
         required: true,
       },  
-      id_loja: {
-        type: "String",
-        required: true,
+      usuario: {
+        type: mongoose.Schema.ObjectId,
+        ref: "Usuario",
       },
     })
     return mongoose.model("Produto", schema);

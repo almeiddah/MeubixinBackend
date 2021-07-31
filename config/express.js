@@ -1,5 +1,6 @@
 const express = require('express');
 const routerProdutos = require("../app/routes/produtos")
+const routerUsuarios = require("../app/routes/usuarios")
 const bodyParser = require("body-parser");
 
 module.exports = function(){
@@ -9,5 +10,6 @@ module.exports = function(){
     app.use(bodyParser.urlencoded({extended: false}));
     app.use(express.static("./public"));
     routerProdutos(app);
+    routerUsuarios(app);
     return app;
 };
