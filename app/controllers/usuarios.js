@@ -3,10 +3,24 @@ const Produto = require("../models/produto")
 const View = require("../view/usuarios");
 const ViewProduto = require("../view/protudos");
 const produto = require("../models/produto");
+const bcrypt = require("bcrypt");
 
 
 module.exports.inserirUsuarios = function(req,res){
-    let usuario = req.body;
+  
+    let usuario = {
+
+      nome_completo: req.body.nome_completo,
+      email: req.body.email,
+      senha: bcrypt.hashSync(req.body.senha,10),
+      tipo_pessoa: req.body.tipo_pessoa,
+      descricao_pessoa: req.body.descricao_pessoa,
+      cidade: req.body.cidade,
+      endereco: req.body.endereco,
+      telefone: req.body.telefone,
+
+
+    }
 
   let promise = Usuario.create(usuario);
   
