@@ -1,9 +1,10 @@
 const Usuario = require("../models/usuario")
 const Produto = require("../models/produto")
+const Servico = require("../models/servico")
 const View = require("../view/usuarios");
 const ViewProduto = require("../view/protudos");
-const produto = require("../models/produto");
 const bcrypt = require("bcrypt");
+
 
 
 module.exports.inserirUsuarios = function(req,res){
@@ -54,4 +55,14 @@ module.exports.obterProdutos = function(req,res){
     }).catch(function(error){
         res.status(500).json({mensagem:"Usuário não possui nenhum produto"});
     })
+}
+
+module.exports.obterServico = function(req,res){
+  let id= req.params.id;
+  let promise = Servico.find({usuario:id});
+  promise.then(function(servicos){
+      res.status(200).json(servicos);
+  }).catch(function(error){
+      res.status(500).json({mensagem:"Usuário não possui nenhum serviço"});
+  })
 }

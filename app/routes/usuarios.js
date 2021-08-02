@@ -9,4 +9,5 @@ module.exports = function(app){
 
     app.get("/usuarios/:id", controller.pesquisarUsuarioPorId);
     app.get("/usuarios/:id/produtos", controller.obterProdutos);
+    app.get("/usuarios/:id/servicos", controller.obterServico);
 }
