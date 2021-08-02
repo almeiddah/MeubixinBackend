@@ -2,6 +2,7 @@ const express = require('express');
 const routerProdutos = require("../app/routes/produtos")
 const routerUsuarios = require("../app/routes/usuarios")
 const routerServicos = require("../app/routes/servicos")
+const routerPets = require("../app/routes/pet");
 const bodyParser = require("body-parser");
 
 module.exports = function(){
@@ -13,5 +14,6 @@ module.exports = function(){
     routerProdutos(app);
     routerServicos(app);
     routerUsuarios(app);
+    routerPets(app);
     return app;
 };
