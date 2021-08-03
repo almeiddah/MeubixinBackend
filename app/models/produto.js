@@ -6,7 +6,7 @@ module.exports = function(){
           required: true,
       },
       valor_produto: {
-        type: "String",
+        type: "Number",
         required: true,
       },
       tipo_produto: {
