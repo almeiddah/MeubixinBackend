@@ -2,10 +2,25 @@ const Pet = require("../models/pet");
 const viewPet = require("../view/pet");
 
 module.exports.inserirPet = function(req,res){
-    console.log("entrou em inserir");
-    let pet = req.body;
-    let promise = Pet.create(pet);
     
+    let token = req.headers.token;
+    let payload = jwt.decode(token);
+    let id_usuario_logado = payload.id;
+
+    let pet = {
+      id_usuario: id_usuario_logado,
+      nome_pet: req.body.nome_pet,
+      descricao_pet: req.body.descricao_pet,
+      especie: req.body.especie,
+      raca: req.body.raca,
+      sexo: req.body.sexo,
+      peso: req.body.peso,
+      idade: req.body.idade
+
+    }
+    
+    let promise = Pet.create(pet);
+
     promise.then(function(pet){
         res.status(201).json(viewPet.render(pet));
     }).catch(function(error){

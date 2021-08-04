@@ -11,7 +11,6 @@ Usuario.findOne({email:req.body.email})
            let token = jwt.sign({id: user._id}, "senha_secreta"); 
             res.status(200).json({token:token});
         }else{
-            console.log("entrou no else");
             res.status(401).send("errou parceira");
         }
     })

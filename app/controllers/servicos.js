@@ -2,8 +2,18 @@ const Servico = require("../models/servico");
 const ViewServico =  require("../view/servicos")
 
 module.exports.inserirServicos = function(req,res){
- 
-    let servico = req.body;
+    
+    let token = req.headers.token;
+    let payload = jwt.decode(token);
+    let id_usuario_logado = payload.id;
+
+    let servico = {
+      nome_servico: req.body.servico,
+      valor_servico: req.body.valor_servico,
+      tipo_servico: req.body.tipo_servico,
+      descricao_servico: req.body.descricao_servico,
+      usuario: id_usuario_logado
+    };
     let promise = Servico.create(servico);
     
     promise.then(function(servico){

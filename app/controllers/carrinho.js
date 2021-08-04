@@ -2,7 +2,6 @@ const Carrinho = require("../models/carrinho");
 const Produto = require("../models/produto");
 const jwt = require("jsonwebtoken");
 
-
 module.exports.inserirPodutoCarrinho = function(req,res){ 
     
     let token = req.headers.token;

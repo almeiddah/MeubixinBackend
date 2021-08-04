@@ -2,10 +2,18 @@ const Produto = require("../models/produto");
 const view = require("../view/protudos");
 
 module.exports.inserirProdutos = function(req,res){
- 
-  let produto = req.body;
-  
+  let token = req.headers.token;
+  let payload = jwt.decode(token);
+  let id_usuario_logado = payload.id;
 
+  let produto = {
+    nome_produto: req.body.nome_produto,
+    valor_produto: req.body.valor_produto,
+    tipo_produto: req.body.tipo_produto,
+    descricao_produto: req.body.descricao_produto,
+    usuario: id_usuario_logado
+  };
+  
   let promise = Produto.create(produto);
   
   promise.then(function(produto){
