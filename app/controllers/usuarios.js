@@ -5,6 +5,7 @@ const View = require("../view/usuarios");
 const ViewProduto = require("../view/protudos");
 const bcrypt = require("bcrypt");
 
+const jwt = require("jsonwebtoken");
 
 
 module.exports.inserirUsuarios = function(req,res){

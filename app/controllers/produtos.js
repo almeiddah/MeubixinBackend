@@ -1,5 +1,6 @@
 const Produto = require("../models/produto");
 const view = require("../view/protudos");
+const jwt = require("jsonwebtoken");
 
 module.exports.inserirProdutos = function(req,res){
   let token = req.headers.token;

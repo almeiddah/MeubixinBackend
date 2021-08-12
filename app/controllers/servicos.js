@@ -1,5 +1,6 @@
 const Servico = require("../models/servico");
 const ViewServico =  require("../view/servicos")
+const jwt = require("jsonwebtoken");
 
 module.exports.inserirServicos = function(req,res){
     
