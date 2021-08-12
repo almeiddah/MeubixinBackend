@@ -1,5 +1,6 @@
 const Pet = require("../models/pet");
 const viewPet = require("../view/pet");
+const jwt = require("jsonwebtoken");
 
 module.exports.inserirPet = function(req,res){
     
