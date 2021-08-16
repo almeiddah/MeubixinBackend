@@ -39,11 +39,35 @@ module.exports.listarProdutosPorloja = function (req,res){
 
 }
 
+module.exports.listarProdutos = function (req,res){
+
+
+  let promise = Produto.find().limit(4).exec();
+  promise.then(function(produtos){
+    res.status(200).json(view.renderMany(produtos))
+  }).catch(function(error){
+    res.status(400).json({mensagem:"produto não encontrado"});
+  })
+
+}
+
 module.exports.listarProdutosPorTipo = function (req,res){
     
+  let categoria = req.params.id;
+  let limite;
+  
+  if(categoria=="brinquedo" || categoria=="arte"){
+      limite=2;
+  }else{
+    limite=4;
+  }
+
+  console.log("Limite:",limite);
+
   let tipo_produto = req.params.id;
   console.log("Tipo do produto:",tipo_produto);
-  let promise = Produto.find({tipo_produto:tipo_produto}).exec();
+  
+  let promise = Produto.find({tipo_produto:tipo_produto}).limit(limite).exec();
   promise.then(function(produtos){
     res.status(200).json(view.renderMany(produtos))
   }).catch(function(error){
