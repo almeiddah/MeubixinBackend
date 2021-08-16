@@ -39,17 +39,20 @@ module.exports.listarProdutosPorloja = function (req,res){
 
 }
 
+
+
 module.exports.listarProdutos = function (req,res){
 
 
-  let promise = Produto.find().limit(4).exec();
+  let promise = Produto.find().sort({$natural:-1}).limit(4).populate('usuario').exec();
   promise.then(function(produtos){
-    res.status(200).json(view.renderMany(produtos))
+    res.status(200).json(produtos)
   }).catch(function(error){
     res.status(400).json({mensagem:"produto não encontrado"});
   })
 
 }
+
 
 module.exports.listarProdutosPorTipo = function (req,res){
     
@@ -67,9 +70,9 @@ module.exports.listarProdutosPorTipo = function (req,res){
   let tipo_produto = req.params.id;
   console.log("Tipo do produto:",tipo_produto);
   
-  let promise = Produto.find({tipo_produto:tipo_produto}).limit(limite).exec();
+  let promise = Produto.find({tipo_produto:tipo_produto}).limit(limite).populate('usuario').exec();
   promise.then(function(produtos){
-    res.status(200).json(view.renderMany(produtos))
+    res.status(200).json(produtos)
   }).catch(function(error){
     res.status(400).json({mensagem:"Produto não encontrado"});
   })
