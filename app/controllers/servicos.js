@@ -1,4 +1,5 @@
 const Servico = require("../models/servico");
+const Usuario = require("../models/usuario");
 const ViewServico =  require("../view/servicos")
 const jwt = require("jsonwebtoken");
 
@@ -31,21 +32,34 @@ module.exports.inserirServicos = function(req,res){
     let tipo_servico = req.params.id;
     console.log("Tipo do servico:",tipo_servico);
     if(tipo_servico == "todos"){
-        let promise = Servico.find().exec();
+        let promise = Servico.find().limit(2).populate("usuario").exec();
     promise.then(function(servicos){
-      res.status(200).json(ViewServico.renderMany(servicos))
+      res.status(200).json(servicos)
     }).catch(function(error){
       res.status(400).json({mensagem:"Nenhum serviço"});
     })
-    }
+    }else{
     
-    let promise = Servico.find({tipo_servico:tipo_servico}).exec();
+    let promise = Servico.find({tipo_servico:tipo_servico}).limit(1).populate("usuario").exec();
     promise.then(function(servicos){
-      res.status(200).json(ViewServico.renderMany(servicos))
+      res.status(200).json(servicos)
     }).catch(function(error){
       res.status(400).json({mensagem:"Serviços nenhum desse tipo encontrados"});
     })
-  
+    }
+  }
+
+  module.exports.listarVeterinario = function (req,res){
+    
+    let tipo_pessoa = req.params.id;
+    console.log(tipo_pessoa);
+    let promise = Usuario.find({tipo_pessoa:tipo_pessoa}).limit(4).exec();
+    promise.then(function(veterinarios){
+      res.status(200).json(veterinarios)
+    }).catch(function(error){
+      res.status(400).json({mensagem:"Não existem veterinários cadastrados"});
+    })
+    
   }
 
   module.exports.removerServico = function(req, res){

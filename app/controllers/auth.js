@@ -9,7 +9,7 @@ Usuario.findOne({email:req.body.email})
 
         if(bcrypt.compareSync(req.body.senha, user.senha)){
            let token = jwt.sign({id: user._id}, "senha_secreta"); 
-            res.status(200).json({token:token, nome_completo:user.nome_completo});
+            res.status(200).json({token:token, nome_completo:user.nome_completo, _id:user._id});
         }else{
             res.status(401).send("errou parceira");
         }
