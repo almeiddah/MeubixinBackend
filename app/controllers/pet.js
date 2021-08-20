@@ -42,12 +42,36 @@ module.exports.inserirPet = function(req,res){
     
   }
 
+  module.exports.listarPets = function (req,res){
+    let id = req.params.id;
+    if(id=="Todos"){
+      let promise = Pet.find().populate('id_usuario').exec();
+    promise.then(function(pets){
+      res.status(200).json(pets)
+    }).catch(function(error){
+      res.status(400).json({mensagem:"Pets não encontrado"});
+    })
+    }else{
+      let promise = Pet.find({especie:id}).populate('id_usuario').exec();
+      promise.then(function(pets){
+        res.status(200).json(pets)
+      }).catch(function(error){
+        res.status(400).json({mensagem:"Pets não encontrado"});
+      })
+    }
+   
+
+}
+
+
+
+
   module.exports.listarPetsPorUser = function (req,res){
     
     let id = req.params.id;
-    let promise = Pet.find({id_usuario:id}).exec();
+    let promise = Pet.find({id_usuario:id}).populate('id_usuario').sort({$natural:-1}).limit(2).exec();
     promise.then(function(pets){
-      res.status(200).json(viewPet.renderMany(pets))
+      res.status(200).json(pets)
     }).catch(function(error){
       res.status(400).json({mensagem:"User não encontrado"});
     })

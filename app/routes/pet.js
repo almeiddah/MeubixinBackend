@@ -5,6 +5,7 @@ module.exports = function(app){
     
     app.use("/pets", auth.checar);
     app.post("/pets", controller.inserirPet);
-    app.get("/pets/:id", controller.listarPetsPorUser);
+    app.get("/petsporuser/:id", controller.listarPetsPorUser);
+    app.get("/pets/:id", controller.listarPets);
     app.delete("/pets/:id/excluir",controller.removerPet);
 }
