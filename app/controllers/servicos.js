@@ -10,7 +10,7 @@ module.exports.inserirServicos = function(req,res){
     let id_usuario_logado = payload.id;
 
     let servico = {
-      nome_servico: req.body.servico,
+      nome_servico: req.body.nome_servico,
       valor_servico: req.body.valor_servico,
       tipo_servico: req.body.tipo_servico,
       descricao_servico: req.body.descricao_servico,
@@ -22,7 +22,7 @@ module.exports.inserirServicos = function(req,res){
       console.log(servico);
         res.status(201).json(ViewServico.render(servico));
     }).catch(function(error){
-        console.log("entrou");
+        console.log(error);
         res.status(400).json({mensagem:"sua requisição n deu certo", error});
     })
   }
@@ -32,7 +32,7 @@ module.exports.inserirServicos = function(req,res){
     let tipo_servico = req.params.id;
     console.log("Tipo do servico:",tipo_servico);
     if(tipo_servico == "todos"){
-        let promise = Servico.find().limit(2).populate("usuario").exec();
+        let promise = Servico.find().sort({$natural:-1}).limit(2).populate("usuario").exec();
     promise.then(function(servicos){
       res.status(200).json(servicos)
     }).catch(function(error){

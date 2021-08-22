@@ -3,6 +3,8 @@ const view = require("../view/protudos");
 const jwt = require("jsonwebtoken");
 
 module.exports.inserirProdutos = function(req,res){
+  console.log("entrou no backend");
+
   let token = req.headers.token;
   let payload = jwt.decode(token);
   let id_usuario_logado = payload.id;
@@ -81,7 +83,7 @@ module.exports.listarProdutosPorTipo = function (req,res){
 
 module.exports.removerProduto = function(req, res){
   let id = req.params.id;
-      
+    console.log("entrou no back", id);
   let promise = Produto.findByIdAndDelete(id);
   
   promise.then(function(produto){

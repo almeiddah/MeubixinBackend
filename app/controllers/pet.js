@@ -25,6 +25,7 @@ module.exports.inserirPet = function(req,res){
     promise.then(function(pet){
         res.status(201).json(viewPet.render(pet));
     }).catch(function(error){
+      console.log("entrou no back", error);
         res.status(400).json({mensagem:"Pet não registrado", error});
     })
   }

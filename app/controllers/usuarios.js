@@ -50,9 +50,9 @@ module.exports.pesquisarUsuarioPorId = function (req,res){
 
 module.exports.obterProdutos = function(req,res){
     let id= req.params.id;
-    let promise = Produto.find({usuario:id});
+    let promise = Produto.find({usuario:id}).populate('usuario').sort({$natural:-1}).limit(4).exec();
     promise.then(function(produtos){
-        res.status(200).json(ViewProduto.renderMany(produtos));
+        res.status(200).json(produtos);
     }).catch(function(error){
         res.status(500).json({mensagem:"Usuário não possui nenhum produto"});
     })
@@ -60,7 +60,7 @@ module.exports.obterProdutos = function(req,res){
 
 module.exports.obterServico = function(req,res){
   let id= req.params.id;
-  let promise = Servico.find({usuario:id});
+  let promise = Servico.find({usuario:id}).populate('usuario').sort({$natural:-1}).limit(2);
   promise.then(function(servicos){
       res.status(200).json(servicos);
   }).catch(function(error){
