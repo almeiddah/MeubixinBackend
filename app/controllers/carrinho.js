@@ -41,7 +41,7 @@ module.exports.listarProdutosFavoritadosPorUsuario = function (req,res){
     console.log("Id:",id);
     let total=0;
 
-    let promise = Carrinho.find({usuario_fav:id}).exec();
+    let promise = Carrinho.find({usuario_fav:id}).populate('usuario_fav').exec();
     
     promise.then(function(produtos){
         

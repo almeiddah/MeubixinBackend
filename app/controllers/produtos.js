@@ -40,6 +40,18 @@ module.exports.listarProdutosPorloja = function (req,res){
     })
 
 }
+module.exports.listarProdutosPorID = function (req,res){
+    
+  let id = req.params.id;
+  console.log("Id:",id);
+  let promise = Produto.find({_id:id}).populate('usuario').exec();
+  promise.then(function(produtos){
+    res.status(200).json(produtos)
+  }).catch(function(error){
+    res.status(400).json({mensagem:"produto não encontrado"});
+  })
+
+}
 
 
 
@@ -72,7 +84,7 @@ module.exports.listarProdutosPorTipo = function (req,res){
   let tipo_produto = req.params.id;
   console.log("Tipo do produto:",tipo_produto);
   
-  let promise = Produto.find({tipo_produto:tipo_produto}).limit(limite).populate('usuario').exec();
+  let promise = Produto.find({tipo_produto:tipo_produto}).sort({$natural:-1}).limit(limite).populate('usuario').exec();
   promise.then(function(produtos){
     res.status(200).json(produtos)
   }).catch(function(error){
