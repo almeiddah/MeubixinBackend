@@ -64,6 +64,19 @@ module.exports.inserirPet = function(req,res){
 
 }
 
+module.exports.listarPet = function (req,res){
+  let id = req.params.id;
+
+    let promise = Pet.find({_id:id}).populate('id_usuario').exec();
+    promise.then(function(pets){
+      res.status(200).json(pets)
+    }).catch(function(error){
+      res.status(400).json({mensagem:"Pets não encontrado"});
+    })
+  
+
+}
+
 
 
 
